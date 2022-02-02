@@ -22,7 +22,8 @@ Thả nhẹ payload `Extract table name` thì mình có được table ***flag_s
 Hy vọng flag nằm trong table này. Minh tiếp tục lấy cột trong table và nội dung của cột chứa flag.
 ![image](https://user-images.githubusercontent.com/94473469/151869160-70667db3-5e02-4c02-bfd3-47f2b92fd730.png)
 ![image](https://user-images.githubusercontent.com/94473469/151869262-cadf3065-9ad4-47ba-ba62-556924989b3e.png)
-Đem flag vừa tìm lên HTB submit > thành công.
+Đem flag vừa tìm lên HTB submit 
+> thành công.
 
 # POC
 ![image](https://user-images.githubusercontent.com/94473469/152088040-f523b90f-4a42-493c-a0af-1583678ce01a.png)
