@@ -27,4 +27,7 @@ Hy vọng flag năm trong table này. Minh tiếp tục lấy cột trong table 
 ![image](https://user-images.githubusercontent.com/94473469/151869262-cadf3065-9ad4-47ba-ba62-556924989b3e.png)
 Đem flag vừa tìm lên HTB submit => thành công.
 
+# POC
+![image](https://user-images.githubusercontent.com/94473469/152088040-f523b90f-4a42-493c-a0af-1583678ce01a.png)
+
 Cám ơn các bạn đã ghé qua đây :))))
