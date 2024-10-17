@@ -5,7 +5,7 @@ Challenge này cho mình hẳn source web, sau khi tải source về và wow Nod
 Có vẻ như là public key được lồng ở trong token của user (mình đoán vậy kkkk). Để chắc chắn cho suy đoán của mình thì mình đã đăng ký một user và đăng nhập với user vừa tạo để lấy giá trị session đem lên JWT.io kiểm chứng.
 ![image](https://user-images.githubusercontent.com/94473469/151861915-52a6b594-2ca4-4a2d-8f1a-3a39cd11e210.png)
 Bởi vì có public key nên mình nghĩ chắc chắn phải có gì đó liên quan đến authen. Thử google một vòng với từ khoá `JWT authen attack`. Mình phát hiện được [hacktricks](https://book.hacktricks.xyz/pentesting-web/hacking-jwt-json-web-tokens#change-the-algorithm-rs256-asymmetric-to-hs256-symmetric-cve-2016-5431-cve-2016-10555) có viết về kĩ thuật thay đổi thuật toán từ RS256 sang HS256. 
-Check lại thuật toán JWT ở challenge này thì tình cờ thấy nó dùng thuật toán HS256. [Google theo kĩ thuật này mình đã được thông não] (https://habr.com/en/post/450054/).
+Check lại thuật toán JWT ở challenge này thì tình cờ thấy nó dùng thuật toán HS256. [Google theo kĩ thuật này mình đã được thông não](https://habr.com/en/post/450054/).
 Do thuật toán HS256 sử dụng khoá bí mật để đánh dấu và xác thực mỗi message, còn thuật toán RS256 thì sử dụng private key để đánh dấu message và public key để xác thực athen. Vì vậy, nếu thay đổi từ thuật toán RS256 sang HS256 thì public key sẽ được sử dụng như khoá bí mật và khi đó thuật toán HS256 dùng để xác thực chữ ký.
 Sau khi thực hiện theo các bước ở site trên mình đã tạo ra được một token mới với thuật toán **HS256** và **user admin**. Tiến hành inject token mới để bypass authen thì mình lại nhận được một kết quả khá là hụt hẫn với thông tin là ***user admin không tồn tại :((((***.
 ![image](https://user-images.githubusercontent.com/94473469/151865255-57f93480-dda0-4363-bead-dcb8e7faf473.png)
@@ -16,7 +16,7 @@ Với kinh nghiệm đã từng dev web laravel mình check thử một vòng tr
 Khi login hàm **checkUser** sẽ được gọi ra và truy vấn xuống database. Input truyền vào chính là username nằm trong phần data của token.
 Mình cũng không rõ lắm về cú pháp của sqlite nên mình chèn đại cú pháp union của mysql xem kết quả trả về như thế nào :))).
 ![image](https://user-images.githubusercontent.com/94473469/151867946-0290a535-6648-42ce-8e88-827f94b3acf2.png)
-Wow chính nó, chính là sql injection đây mà. Do không rành về cú pháp sqlite nên mình google dùng một vài payload trên [git] (https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/SQL%20Injection/SQLite%20Injection.md).
+Wow chính nó, chính là sql injection đây mà. Do không rành về cú pháp sqlite nên mình google dùng một vài payload trên [git](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/SQL%20Injection/SQLite%20Injection.md).
 Thả nhẹ payload `Extract table name` thì mình có được table ***flag_storage***
 ![image](https://user-images.githubusercontent.com/94473469/151868780-40c0c85e-6376-4c3a-b36c-89e0e99269a1.png)
 Hy vọng flag nằm trong table này. Minh tiếp tục lấy cột trong table và nội dung của cột chứa flag.
